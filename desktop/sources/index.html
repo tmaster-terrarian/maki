@@ -9,6 +9,30 @@
     <link rel="stylesheet" href="links/main.css"/>
 </head>
 <body>
-    hello world!
+    <script>
+        'use strict'
+
+        const { remote } = require('electron')
+        const { app } = remote
+        const EOL = '\n'
+
+        if (remote.process.argv.length > 1) {
+            // pass in file remote.process.argv[1]
+        }
+    </script>
+    <div class="grid">
+        <div class="header">
+            <div class="header-left">
+                <button tabindex="-1">*</button>
+                <button tabindex="-1">File</button>
+                <button tabindex="-1">Edit</button>
+                <button tabindex="-1">Selection</button>
+                <button tabindex="-1">View</button>
+            </div>
+            <div class="header-right">
+                <button tabindex="-1" onclick="window.close()">X</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

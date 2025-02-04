@@ -23,24 +23,23 @@ app.on('ready', () => {
     })
 
     app.win.loadURL(`file://${__dirname}/sources/index.html`)
-    // app.inspect()
-  
+
     app.win.on('closed', () => {
         app.quit()
     })
-  
-    app.win.on('hide', function () {
+
+    app.win.on('hide', () => {
         isShown = false
     })
-  
-    app.win.on('show', function () {
+
+    app.win.on('show', () => {
         isShown = true
     })
-  
+
     app.on('window-all-closed', () => {
         app.quit()
     })
-  
+
     app.on('activate', () => {
         if (app.win === null) {
             createWindow()
@@ -49,20 +48,20 @@ app.on('ready', () => {
         }
     })
 })
-  
-app.inspect = function () {
+
+app.inspect = () => {
     app.win.toggleDevTools()
 }
 
-app.toggleFullscreen = function () {
+app.toggleFullscreen = () => {
     app.win.setFullScreen(!app.win.isFullScreen())
 }
 
-app.toggleMenubar = function () {
+app.toggleMenubar = () => {
     app.win.setMenuBarVisibility(!app.win.isMenuBarVisible())
 }
 
-app.toggleVisible = function () {
+app.toggleVisible = () => {
     if (process.platform !== 'darwin')
     {
         if (!app.win.isMinimized()) { app.win.minimize() } else { app.win.restore() }
@@ -73,7 +72,7 @@ app.toggleVisible = function () {
     }
 }
 
-app.injectMenu = function (menu) {
+app.injectMenu = (menu) => {
     try
     {
         Menu.setApplicationMenu(Menu.buildFromTemplate(menu))
