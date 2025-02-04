@@ -1,0 +1,39 @@
+{
+    "name": "maki",
+    "productName": "maki",
+    "version": "0.1.0",
+    "main": "main.js",
+    "author": {
+        "name": "bscit",
+        "email": "bscitdv@gmail.com",
+        "url": "https://bscit.dev"
+    },
+    "license": "MIT",
+    "scripts": {
+        "start": "electron . --disable-gpu",
+        "clean": "rm -r ./bin/maki-darwin-x64/ ; rm -r ./bin/maki-linux-x64/ ; rm -r ./bin/maki-win32-x64/ ; echo 'cleaned build location'",
+        "build_linux": "electron-packager . maki --platform=linux  --arch=x64 --out ./bin/ --overwrite --icon=icon.ico ; echo 'Built for LINUX'",
+        "build_osx": "electron-packager . maki --platform=darwin --arch=x64 --out ./bin/ --overwrite --icon=icon.icns ; echo 'Built for OSX'",
+        "build_win": "electron-packager . maki --platform=win32  --arch=x64 --out ./bin/ --overwrite --icon=icon.ico ; echo 'Built for WIN'",
+        "build": "npm run clean ; npm run build_linux ; npm run build_osx ; npm run build_win"
+    },
+    "devDependencies": {
+        "electron": "^7.1.12",
+        "electron-packager": "^14.2.1"
+    },
+    "standard": {
+        "globals": [
+            "terminal",
+            "localStorage",
+            "DOMParser",
+            "onMessage",
+            "postMessage",
+            "FileReader",
+            "performance",
+            "Worker"
+        ],
+        "ignore": [
+            "/node_modules/*"
+        ]
+    }
+}
