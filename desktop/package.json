@@ -17,8 +17,8 @@
         "build": "npm run build_linux ; npm run build_osx ; npm run build_win"
     },
     "devDependencies": {
-        "electron": "^7.1.12",
-        "electron-packager": "^14.2.1"
+        "electron": "^34.0.2",
+        "electron-packager": "^17.1.2"
     },
     "standard": {
         "globals": [
@@ -34,5 +34,8 @@
         "ignore": [
             "/node_modules/*"
         ]
+    },
+    "dependencies": {
+        "@electron/remote": "github:electron/remote"
     }
 }

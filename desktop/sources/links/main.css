@@ -45,32 +45,46 @@ body {
     margin: 0;
 
     background-color: var(--c-2);
-}
 
-.header .header-left, .header .header-right {
-    display: flex;
-    flex-wrap: nowrap;
-    flex-direction: row;
-    width: fit-content;
-}
+    >div:not(.span) {
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: row;
+        width: fit-content;
+    }
+    >div.span {
+        margin: 0;
+        width: auto;
+        height: 100%;
 
-.header button {
-    all: unset;
-    font: inherit;
-    color: inherit;
-    line-height: 1em;
-    cursor: pointer;
-    padding: 0 1ch;
-    margin: 0;
-    height: 100%;
+        app-region: drag;
+    }
 
-    user-select: none;
-}
-.header button:hover {
-    color: color-mix(in srgb, var(--c-1) 100%, #fff 80%);
-    background-color: color-mix(in srgb, var(--c-2) 100%, #fff 25%);
-}
-.header button:active {
-    color: var(--c-0);
-    background-color: var(--c-1);
+    button {
+        all: unset;
+        display: block;
+        font: inherit;
+        color: inherit;
+        line-height: 1em;
+        cursor: pointer;
+        padding: 0 1ch;
+        margin: 0;
+        height: 100%;
+    
+        user-select: none;
+    }
+    button:hover {
+        color: color-mix(in srgb, var(--c-1) 100%, #fff 80%);
+        background-color: color-mix(in srgb, var(--c-2) 100%, #fff 25%);
+    }
+    button:active {
+        color: var(--c-0);
+        background-color: var(--c-1);
+    }
+
+    button.square {
+        width: 3ch;
+        text-align: center;
+        padding: 0;
+    }
 }

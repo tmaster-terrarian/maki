@@ -1,7 +1,7 @@
-'use strict'
-
 const { app, BrowserWindow, Menu } = require('electron')
-// const path = require('path')
+const path = require('path')
+
+require('@electron/remote/main').initialize()
 
 let isShown = true
 
@@ -19,10 +19,25 @@ app.on('ready', () => {
         frame: process.platform !== 'darwin',
         skipTaskbar: process.platform === 'darwin',
         autoHideMenuBar: process.platform === 'darwin',
-        webPreferences: { zoomFactor: 1.0, nodeIntegration: true, backgroundThrottling: false }
+        webPreferences: {
+            zoomFactor: 1.0,
+            nodeIntegration: true,
+            backgroundThrottling: false,
+            textAreasAreResizable: false,
+            nodeIntegration: true,
+            contextIsolation: false,
+        },
+        titleBarStyle: 'hidden',
+        disableAutoHideCursor: true,
+        // ...(process.platform !== 'darwin' ? { titleBarOverlay: true } : {})
     })
 
+    // if(process.platform !== 'darwin')
+    //     app.win.setMenuBarVisibility(false)
+
     app.win.loadURL(`file://${__dirname}/sources/index.html`)
+
+    require('@electron/remote/main').enable(app.win.webContents)
 
     app.win.on('closed', () => {
         app.quit()
@@ -58,7 +73,7 @@ app.toggleFullscreen = () => {
 }
 
 app.toggleMenubar = () => {
-    app.win.setMenuBarVisibility(!app.win.isMenuBarVisible())
+    // app.win.setMenuBarVisibility(!app.win.isMenuBarVisible())
 }
 
 app.toggleVisible = () => {
