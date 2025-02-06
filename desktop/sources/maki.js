@@ -1,8 +1,13 @@
+import Project from './lib/Project.js'
+import InfoBar from './scripts/infoBar.js'
 import Menu from './scripts/menu.js'
 
 export default class Maki
 {
     menu = new Menu()
+    infoBar = new InfoBar()
+
+    project = new Project()
 
     constructor() { }
 
@@ -16,6 +21,8 @@ export default class Maki
         this.menu.build()
         this.menu.install(gridEl)
 
+        this.infoBar.install(gridEl)
+
         host.addEventListener('click', event => {
             window.dispatchEvent(new Event('close-menu', {
                 cancelable: false,
@@ -25,6 +32,6 @@ export default class Maki
 
     start()
     {
-        
+        this.infoBar.update(this.project)
     }
 }
