@@ -46,18 +46,50 @@ body {
 
     background-color: var(--c-2);
 
-    >div:not(.span) {
+    app-region: drag;
+
+    >div {
         display: flex;
         flex-wrap: nowrap;
         flex-direction: row;
         width: fit-content;
+        app-region: none;
     }
-    >div.span {
-        margin: 0;
-        width: auto;
-        height: 100%;
 
-        app-region: drag;
+    .button-holder {
+        display: block;
+        position: relative;
+
+        .submenu {
+            display: none;
+            width: max-content;
+            padding: 0;
+            list-style-type: none;
+
+            background-color: var(--c-2);
+
+            flex-wrap: nowrap;
+            flex-direction: column;
+
+            position: absolute;
+            left: 0;
+            top: 2em;
+
+            width: 24ch;
+
+            button {
+                display: list-item;
+                margin: 0;
+                padding: 0;
+                list-style-type: none;
+                height: 2em;
+                padding: 0 1ch;
+                width: calc(100% - 2ch);
+            }
+        }
+        button.active+.submenu {
+            display: flex;
+        }
     }
 
     button {
@@ -70,14 +102,14 @@ body {
         padding: 0 1ch;
         margin: 0;
         height: 100%;
-    
+
         user-select: none;
     }
     button:hover {
         color: color-mix(in srgb, var(--c-1) 100%, #fff 80%);
         background-color: color-mix(in srgb, var(--c-2) 100%, #fff 25%);
     }
-    button:active {
+    button:active, button.active {
         color: var(--c-0);
         background-color: var(--c-1);
     }
@@ -87,4 +119,11 @@ body {
         text-align: center;
         padding: 0;
     }
+}
+
+.f-r {
+    float: right;
+}
+.f-l {
+    float: left;
 }

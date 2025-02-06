@@ -28,8 +28,7 @@ app.on('ready', () => {
             contextIsolation: false,
         },
         titleBarStyle: 'hidden',
-        disableAutoHideCursor: true,
-        // ...(process.platform !== 'darwin' ? { titleBarOverlay: true } : {})
+        disableAutoHideCursor: true
     })
 
     // if(process.platform !== 'darwin')
