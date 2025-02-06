@@ -1,3 +1,4 @@
+const { BrowserWindow } = require("@electron/remote")
 import { MenuOption, MenuOptionList } from "../lib/MenuItem.js"
 
 let holdingAlt = false
@@ -8,27 +9,11 @@ export default class Menu
     leftEl = document.createElement('div')
     rightEl = document.createElement('div')
 
-    buttons = this.leftEl.getElementsByTagName('button')
     activeButtons = this.leftEl.getElementsByClassName('active')
+    rootButtonHolders = this.leftEl.getElementsByClassName('_menu-root-item')
 
-    options = [
-        new MenuOption({
-            name: 'File',
-            altKey: 'f',
-            menu: new MenuOptionList([
-                new MenuOption({
-                    name: 'Quit',
-                    hint: '<c-q>',
-                    onclick: () => window.close(),
-                    keyListener: event => process.platform === 'win32'
-                        ? event.code === 'KeyF4' && !event.metaKey && event.altKey && !event.shiftKey && !event.ctrlKey
-                        : (process.platform === 'darwin'
-                            ? event.code === 'KeyQ' && event.metaKey && !event.altKey && !event.shiftKey && !event.ctrlKey
-                            : event.code === 'KeyQ' && !event.metaKey && !event.altKey && !event.shiftKey && event.ctrlKey),
-                })
-            ]),
-        })
-    ]
+    /** @type {MenuOption[]} */
+    options = []
 
     /** @type {((event: KeyboardEvent) => {})[]} */
     altKeyEvents = []
@@ -44,10 +29,11 @@ export default class Menu
 
     build() {
         this.options.forEach((option, i) => {
-            const el = this.buildItem(option)
+            const el = this.buildItem(option, 0)
             if(el)
             {
                 this.leftEl.appendChild(el)
+                el.classList.add('_menu-root-item')
             }
         })
 
@@ -86,9 +72,9 @@ export default class Menu
 
     /**
      * @param {MenuOption} option
-     * @returns {Node}
+     * @returns {HTMLElement}
      */
-    buildItem(option) {
+    buildItem(option, depth) {
         const el = document.createElement('button')
         el.setAttribute('tabindex', '-1')
 
@@ -117,26 +103,42 @@ export default class Menu
 
         if(option.hint)
         {
-            label += `<span class="f-r">${option.hint.replaceAll('<', '&lt;').replaceAll('>', '&gt;')}</span>`
+            label += `<span class="label">${option.hint.replaceAll('<', '&lt;').replaceAll('>', '&gt;')}</span>`
+        }
+        else if(option.menu && depth != 0)
+        {
+            label += `<span class="label">-&gt;</span>`
         }
 
         el.innerHTML = label
 
         el.addEventListener('click', event => {
             if(option.menu)
+            {
                 el.classList.toggle('active')
+                if(el.classList.contains('active'))
+                {
+                    const listEl = Array.from(holderEl.children)[1]
+                    recalculateListBounds(listEl)
+                }
+            }
             else
                 option.onclick()
         })
 
         if(option.menu)
         {
-            holderEl.addEventListener('focusout', event => {
-                if(!holderEl.contains(event.target))
+            document.body.addEventListener('click', event => {
+                if(!holderEl.contains(event.target) && holderEl != event.target)
                     el.classList.remove('active')
             })
             el.addEventListener('mouseenter', event => {
-                if(this.activeButtons.length != 0)
+                let anyActive = Array.from(this.rootButtonHolders)
+                    .findIndex(item => {
+                        return item.firstElementChild.classList.contains('active')
+                    }) != -1
+
+                if(!el.classList.contains('active') && anyActive && depth == 0)
                 {
                     Array.from(this.activeButtons).forEach(element => {
                         element.classList.remove('active')
@@ -147,15 +149,47 @@ export default class Menu
 
             const listEl = document.createElement('ul')
             listEl.classList.add('submenu')
+            listEl.style.zIndex = depth
             holderEl.appendChild(listEl)
 
+            BrowserWindow.getFocusedWindow().addListener('resize', () => {
+                if(el.classList.contains('active'))
+                {
+                    recalculateListBounds(listEl)
+                }
+            })
+
             option.menu.options.forEach((option => {
-                const el = this.buildItem(option)
+                const el = this.buildItem(option, depth + 1)
                 if(el)
                 {
                     listEl.appendChild(el)
+                    if(option.sectionEnd)
+                    {
+                        listEl.appendChild(document.createElement('hr'))
+                    }
                 }
             }))
+        }
+
+        function recalculateListBounds(listEl) {
+            listEl.style.maxWidth = ''
+            listEl.style.left = ''
+
+            const maxWidth = window.innerWidth - listEl.getBoundingClientRect().left
+            listEl.style.maxWidth = `${Math.max(maxWidth, 0)}px`
+
+            if (depth != 0) {
+                const offset = Math.min(0, window.innerWidth - (listEl.getBoundingClientRect().right))
+                listEl.style.left = `calc(100% + ${offset}px)`
+                if (offset != 0) {
+                    listEl.style.boxShadow = '-2px -2px var(--c-0)'
+                }
+
+                else {
+                    listEl.style.boxShadow = ''
+                }
+            }
         }
 
         if(option.keyListener)
@@ -163,7 +197,6 @@ export default class Menu
             this.keyEvents.push(event => {
                 if(option.keyListener())
                 {
-                    console.log(option.name + ' clicked !')
                     el.click()
                     event.preventDefault()
                 }
@@ -173,7 +206,7 @@ export default class Menu
         return holderEl
     }
 
-    /** @param {Node} host */
+    /** @param {HTMLElement} host */
     install(host) {
         host.appendChild(this.el)
 

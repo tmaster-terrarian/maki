@@ -1,3 +1,4 @@
+import { MenuOption, MenuOptionList } from './lib/MenuItem.js'
 import Maki from './maki.js'
 
 const { shell } = require('electron'), remote = require('@electron/remote')
@@ -5,6 +6,107 @@ const { app } = remote
 const EOL = '\n'
 
 const maki = new Maki()
+
+maki.menu.options = [
+    new MenuOption({
+        name: 'File',
+        altKey: 'f',
+        menu: new MenuOptionList([
+            new MenuOption({
+                name: 'new',
+                hint: '<c-n>',
+                onclick: () => {},
+                keyListener: event => process.platform === 'darwin'
+                    ? event.code === 'KeyN' && event.metaKey && !event.altKey && !event.shiftKey && !event.ctrlKey
+                    : event.code === 'KeyN' && !event.metaKey && !event.altKey && !event.shiftKey && event.ctrlKey,
+            }),
+            new MenuOption({
+                name: 'open...',
+                hint: '<c-o>',
+                onclick: () => {},
+                keyListener: event => process.platform === 'darwin'
+                    ? event.code === 'KeyO' && event.metaKey && !event.altKey && !event.shiftKey && !event.ctrlKey
+                    : event.code === 'KeyO' && !event.metaKey && !event.altKey && !event.shiftKey && event.ctrlKey,
+                sectionEnd: true,
+            }),
+
+            new MenuOption({
+                name: 'save',
+                hint: '<c-s>',
+                onclick: () => {},
+                keyListener: event => process.platform === 'darwin'
+                    ? event.code === 'KeyS' && event.metaKey && !event.altKey && !event.shiftKey && !event.ctrlKey
+                    : event.code === 'KeyS' && !event.metaKey && !event.altKey && !event.shiftKey && event.ctrlKey,
+            }),
+            new MenuOption({
+                name: 'save as...',
+                hint: '<c-S>',
+                onclick: () => {},
+                keyListener: event => process.platform === 'darwin'
+                    ? event.code === 'KeyS' && event.metaKey && !event.altKey && event.shiftKey && !event.ctrlKey
+                    : event.code === 'KeyS' && !event.metaKey && !event.altKey && event.shiftKey && event.ctrlKey,
+                sectionEnd: true,
+            }),
+
+            new MenuOption({
+                name: 'quit',
+                hint: process.platform === 'win32' ? '<a-f4>' : '<c-q>',
+                onclick: () => window.close(),
+                keyListener: event => process.platform === 'win32'
+                    ? event.code === 'KeyF4' && !event.metaKey && event.altKey && !event.shiftKey && !event.ctrlKey
+                    : (process.platform === 'darwin'
+                        ? event.code === 'KeyQ' && event.metaKey && !event.altKey && !event.shiftKey && !event.ctrlKey
+                        : event.code === 'KeyQ' && !event.metaKey && !event.altKey && !event.shiftKey && event.ctrlKey),
+            }),
+        ]),
+    }),
+    new MenuOption({
+        name: 'Edit',
+        altKey: 'e',
+        menu: new MenuOptionList([
+            new MenuOption({
+                name: 'undo',
+                hint: '<c-z>',
+            }),
+            new MenuOption({
+                name: 'redo',
+                hint: '<c-y>',
+                sectionEnd: true,
+            }),
+
+            new MenuOption({
+                name: 'cut',
+                hint: '<c-x>',
+            }),
+            new MenuOption({
+                name: 'copy',
+                hint: '<c-c>',
+            }),
+            new MenuOption({
+                name: 'paste',
+                hint: '<c-v>',
+                sectionEnd: true,
+            }),
+
+            new MenuOption({
+                name: 'find',
+                hint: '<c-f>',
+                onclick: () => {},
+                keyListener: event => process.platform === 'darwin'
+                    ? event.code === 'KeyF' && event.metaKey && !event.altKey && !event.shiftKey && !event.ctrlKey
+                    : event.code === 'KeyF' && !event.metaKey && !event.altKey && !event.shiftKey && event.ctrlKey,
+            }),
+            new MenuOption({
+                name: 'replace',
+                hint: '<c-h>',
+                onclick: () => {},
+                keyListener: event => process.platform === 'darwin'
+                    ? event.code === 'KeyH' && event.metaKey && !event.altKey && !event.shiftKey && !event.ctrlKey
+                    : event.code === 'KeyH' && !event.metaKey && !event.altKey && !event.shiftKey && event.ctrlKey,
+            }),
+        ]),
+    }),
+]
 
 maki.install(document.body)
 maki.start()

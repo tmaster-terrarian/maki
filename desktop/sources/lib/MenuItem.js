@@ -7,6 +7,7 @@ export class MenuOption
      *   onclick?: () => {},
      *   keyListener?: (event: KeyboardEvent) => boolean,
      *   hint?: string,
+     *   sectionEnd?: boolean,
      *   menu?: MenuOptionList
      * }} [options]
      */
@@ -17,6 +18,7 @@ export class MenuOption
         this.onclick = options?.onclick ?? (() => {})
         this.keyListener = options?.keyListener ?? (() => false)
         this.hint = options?.hint ?? ''
+        this.sectionEnd = options?.sectionEnd ?? false
         this.menu = options?.menu ?? null
     }
 }

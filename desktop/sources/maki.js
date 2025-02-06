@@ -18,7 +18,6 @@ export default class Maki
 
         host.addEventListener('click', event => {
             window.dispatchEvent(new Event('close-menu', {
-                bubbles: false,
                 cancelable: false,
             }))
         })
