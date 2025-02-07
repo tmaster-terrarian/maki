@@ -17,16 +17,16 @@ maki.menu.options = [
                 hint: '<c-n>',
                 onclick: () => {},
                 keyListener: event => process.platform === 'darwin'
-                    ? event.code === 'KeyN' && event.metaKey && !event.altKey && !event.shiftKey && !event.ctrlKey
-                    : event.code === 'KeyN' && !event.metaKey && !event.altKey && !event.shiftKey && event.ctrlKey,
+                    ? event.key.toLowerCase() === 'n' && event.metaKey && !event.altKey && !event.shiftKey && !event.ctrlKey
+                    : event.key.toLowerCase() === 'n' && !event.metaKey && !event.altKey && !event.shiftKey && event.ctrlKey,
             }),
             new MenuOption({
                 name: 'open...',
                 hint: '<c-o>',
                 onclick: () => {},
                 keyListener: event => process.platform === 'darwin'
-                    ? event.code === 'KeyO' && event.metaKey && !event.altKey && !event.shiftKey && !event.ctrlKey
-                    : event.code === 'KeyO' && !event.metaKey && !event.altKey && !event.shiftKey && event.ctrlKey,
+                    ? event.key.toLowerCase() === 'o' && event.metaKey && !event.altKey && !event.shiftKey && !event.ctrlKey
+                    : event.key.toLowerCase() === 'o' && !event.metaKey && !event.altKey && !event.shiftKey && event.ctrlKey,
                 sectionEnd: true,
             }),
 
@@ -35,16 +35,16 @@ maki.menu.options = [
                 hint: '<c-s>',
                 onclick: () => {},
                 keyListener: event => process.platform === 'darwin'
-                    ? event.code === 'KeyS' && event.metaKey && !event.altKey && !event.shiftKey && !event.ctrlKey
-                    : event.code === 'KeyS' && !event.metaKey && !event.altKey && !event.shiftKey && event.ctrlKey,
+                    ? event.key.toLowerCase() === 's' && event.metaKey && !event.altKey && !event.shiftKey && !event.ctrlKey
+                    : event.key.toLowerCase() === 's' && !event.metaKey && !event.altKey && !event.shiftKey && event.ctrlKey,
             }),
             new MenuOption({
                 name: 'save as...',
                 hint: '<c-S>',
                 onclick: () => {},
                 keyListener: event => process.platform === 'darwin'
-                    ? event.code === 'KeyS' && event.metaKey && !event.altKey && event.shiftKey && !event.ctrlKey
-                    : event.code === 'KeyS' && !event.metaKey && !event.altKey && event.shiftKey && event.ctrlKey,
+                    ? event.key.toLowerCase() === 's' && event.metaKey && !event.altKey && event.shiftKey && !event.ctrlKey
+                    : event.key.toLowerCase() === 's' && !event.metaKey && !event.altKey && event.shiftKey && event.ctrlKey,
                 sectionEnd: true,
             }),
 
@@ -55,8 +55,8 @@ maki.menu.options = [
                 keyListener: event => process.platform === 'win32'
                     ? event.code === 'KeyF4' && !event.metaKey && event.altKey && !event.shiftKey && !event.ctrlKey
                     : (process.platform === 'darwin'
-                        ? event.code === 'KeyQ' && event.metaKey && !event.altKey && !event.shiftKey && !event.ctrlKey
-                        : event.code === 'KeyQ' && !event.metaKey && !event.altKey && !event.shiftKey && event.ctrlKey),
+                        ? event.key.toLowerCase() === 'q' && event.metaKey && !event.altKey && !event.shiftKey && !event.ctrlKey
+                        : event.key.toLowerCase() === 'q' && !event.metaKey && !event.altKey && !event.shiftKey && event.ctrlKey),
             }),
         ]),
     }),
@@ -93,16 +93,16 @@ maki.menu.options = [
                 hint: '<c-f>',
                 onclick: () => {},
                 keyListener: event => process.platform === 'darwin'
-                    ? event.code === 'KeyF' && event.metaKey && !event.altKey && !event.shiftKey && !event.ctrlKey
-                    : event.code === 'KeyF' && !event.metaKey && !event.altKey && !event.shiftKey && event.ctrlKey,
+                    ? event.key.toLowerCase() === 'KeyF' && event.metaKey && !event.altKey && !event.shiftKey && !event.ctrlKey
+                    : event.key.toLowerCase() === 'KeyF' && !event.metaKey && !event.altKey && !event.shiftKey && event.ctrlKey,
             }),
             new MenuOption({
                 name: 'replace',
                 hint: '<c-h>',
                 onclick: () => {},
                 keyListener: event => process.platform === 'darwin'
-                    ? event.code === 'KeyH' && event.metaKey && !event.altKey && !event.shiftKey && !event.ctrlKey
-                    : event.code === 'KeyH' && !event.metaKey && !event.altKey && !event.shiftKey && event.ctrlKey,
+                    ? event.key.toLowerCase() === 'KeyH' && event.metaKey && !event.altKey && !event.shiftKey && !event.ctrlKey
+                    : event.key.toLowerCase() === 'KeyH' && !event.metaKey && !event.altKey && !event.shiftKey && event.ctrlKey,
             }),
         ]),
     }),
