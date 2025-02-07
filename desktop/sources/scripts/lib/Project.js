@@ -1,21 +1,23 @@
+import TextDocument from "./TextDocument.js"
+
 export default class Project
 {
-    lineEnding = 'LF'
-    encoding = 'UTF-8'
+    lineEnding = '\n'
+    encoding = 'utf-8'
 
-    currentDocument = {
-        text: '',
-        name: 'untitled',
-        path: null,
-        getLabels: () => [],
-        getLines: () => this.currentDocument.text.split(this.currentDocument.lineEnding),
-        getByteCount: () => 0,
-        getCharCount: () => 0,
-        getWordCount: () => 0,
+    get lineEndingFriendlyName()
+    {
+        switch(this.lineEnding)
+        {
+            case '\n': return 'lf'
+            case '\r\n': return 'crlf'
+            default: return null
+        }
     }
 
     constructor()
     {
-        
+        this.currentDocument = new TextDocument(this)
+        this.currentDocument.update('')
     }
 }

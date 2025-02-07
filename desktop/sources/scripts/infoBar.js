@@ -71,6 +71,15 @@ export default class InfoBar
         this.lineCountEl.innerText = project.currentDocument.getLines().length + 'l'
 
         this.encodingEl.innerText = project.encoding
-        this.lineEndingEl.innerText = project.lineEnding
+
+        if(project.lineEndingFriendlyName)
+        {
+            this.lineEndingEl.innerText = project.lineEndingFriendlyName
+            this.lineEndingEl.hidden = false
+        }
+        else
+        {
+            this.lineEndingEl.hidden = true
+        }
     }
 }
