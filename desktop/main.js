@@ -12,8 +12,8 @@ if(process.platform !== 'darwin')
 
 app.on('ready', () => {
     app.win = new BrowserWindow({
-        width: 780,
-        height: 462,
+        width: 1024,
+        height: 768,
         minWidth: 380,
         minHeight: 360,
         backgroundColor: '#181818',
