@@ -50,7 +50,7 @@ maki.menu.options = [
 
             new MenuOption({
                 name: 'quit',
-                hint: process.platform === 'win32' ? '<a-f4>' : '<c-q>',
+                hint: process.platform === 'win32' ? '<m-f4>' : '<c-q>',
                 onclick: () => window.close(),
                 keyListener: event => process.platform === 'win32'
                     ? event.code === 'KeyF4' && !event.metaKey && event.altKey && !event.shiftKey && !event.ctrlKey
