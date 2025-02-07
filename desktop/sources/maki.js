@@ -1,4 +1,4 @@
-import Project from './lib/Project.js'
+import Project from './scripts/lib/Project.js'
 import InfoBar from './scripts/infoBar.js'
 import Menu from './scripts/menu.js'
 

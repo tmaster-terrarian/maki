@@ -1,5 +1,5 @@
 const { BrowserWindow } = require("@electron/remote")
-import { MenuOption, MenuOptionList } from "../lib/MenuItem.js"
+import { MenuOption, MenuOptionList } from "./lib/MenuItem.js"
 
 let holdingAlt = false
 

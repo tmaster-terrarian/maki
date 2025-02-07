@@ -1,4 +1,4 @@
-import { MenuOption, MenuOptionList } from './lib/MenuItem.js'
+import { MenuOption, MenuOptionList } from './scripts/lib/MenuItem.js'
 import Maki from './maki.js'
 
 const { shell } = require('electron'), remote = require('@electron/remote')

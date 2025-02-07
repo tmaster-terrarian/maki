@@ -1,4 +1,4 @@
-import Project from "../lib/Project.js"
+import Project from "./lib/Project.js"
 
 export default class InfoBar
 {
