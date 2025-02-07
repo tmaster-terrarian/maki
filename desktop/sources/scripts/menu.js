@@ -93,7 +93,7 @@ export default class Menu
             }
 
             this.altKeyEvents.push(event => {
-                if(event.key === `Key${option.altKey.toUpperCase()}` && event.altKey && !event.ctrlKey && !event.shiftKey)
+                if(event.key.toLowerCase() === `${option.altKey.toLowerCase()}` && event.altKey && !event.ctrlKey && !event.shiftKey && !event.metaKey)
                 {
                     el.click()
                     event.preventDefault()

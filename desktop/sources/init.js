@@ -53,7 +53,7 @@ maki.menu.options = [
                 hint: process.platform === 'win32' ? '<m-f4>' : '<c-q>',
                 onclick: () => window.close(),
                 keyListener: event => process.platform === 'win32'
-                    ? event.code === 'KeyF4' && !event.metaKey && event.altKey && !event.shiftKey && !event.ctrlKey
+                    ? false
                     : (process.platform === 'darwin'
                         ? event.key.toLowerCase() === 'q' && event.metaKey && !event.altKey && !event.shiftKey && !event.ctrlKey
                         : event.key.toLowerCase() === 'q' && !event.metaKey && !event.altKey && !event.shiftKey && event.ctrlKey),
