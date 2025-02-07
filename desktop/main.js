@@ -7,6 +7,9 @@ let isShown = true
 
 app.win = null
 
+if(process.platform !== 'darwin')
+    Menu.setApplicationMenu(null)
+
 app.on('ready', () => {
     app.win = new BrowserWindow({
         width: 780,
