@@ -117,7 +117,7 @@ export default class Menu
 
         el.innerHTML = label
 
-        el.addEventListener('mouseup', event => {
+        el.addEventListener('click', event => {
             if(!option.menu && event.target == el)
             {
                 option.onclick()
