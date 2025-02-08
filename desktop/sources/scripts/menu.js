@@ -9,6 +9,8 @@ export default class Menu
     leftEl = document.createElement('div')
     rightEl = document.createElement('div')
 
+    spacerEl = document.createElement('div')
+
     activeButtons = this.leftEl.getElementsByClassName('active')
     rootButtonHolders = this.leftEl.getElementsByClassName('_menu-root-item')
 
@@ -25,6 +27,9 @@ export default class Menu
         this.el.classList.add('header')
         this.el.appendChild(this.leftEl)
         this.el.appendChild(this.rightEl)
+
+        this.spacerEl.style.width = process.platform === 'darwin' ? '10ch' : '0'
+        this.leftEl.appendChild(this.spacerEl)
     }
 
     build() {
