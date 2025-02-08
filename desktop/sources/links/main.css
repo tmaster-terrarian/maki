@@ -26,8 +26,8 @@ body {
 
 .grid {
     --s-header: 2em;
-    --s-files: min(24ch, calc(50% - 5ch));
-    --s-sidebar: min(24ch, calc(50% - 5ch));
+    --s-files: min(24ch, calc(50vw - 6ch));
+    --s-sidebar: min(24ch, calc(50vw - 6ch));
     --s-footer: 3em;
 
     display: grid;
