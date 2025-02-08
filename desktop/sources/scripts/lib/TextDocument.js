@@ -16,7 +16,7 @@ export default class TextDocument
 
     get name()
     {
-        return this.path?.match(/(?<=\/)[^/]+$/)[0] ?? 'Untitled'
+        return this.path?.match(/(?<=\/)[^/]+$/)[0] ?? 'untitled'
     }
 
     /** @param {Project} project */

@@ -195,7 +195,7 @@ export default class Menu
         if(option.keyListener)
         {
             this.keyEvents.push(event => {
-                if(option.keyListener())
+                if(option.keyListener(event))
                 {
                     el.click()
                     event.preventDefault()
@@ -210,7 +210,15 @@ export default class Menu
     install(host) {
         host.appendChild(this.el)
 
-        this.altKeyEvents.forEach(handler => window.addEventListener('keydown', handler))
-        this.keyEvents.forEach(handler => window.addEventListener('keydown', handler))
+        this.altKeyEvents.forEach(
+            handler => window.addEventListener('keydown', event => {
+                handler(event)
+            })
+        )
+        this.keyEvents.forEach(
+            handler => window.addEventListener('keydown', event => {
+                handler(event)
+            })
+        )
     }
 }

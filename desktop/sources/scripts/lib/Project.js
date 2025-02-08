@@ -5,6 +5,16 @@ export default class Project
     lineEnding = '\n'
     encoding = 'utf-8'
 
+    currentDocumentIndex = 0
+
+    /** @type {TextDocument[]} */
+    __documents = []
+
+    get currentDocument()
+    {
+        return this.__documents[this.currentDocumentIndex]
+    }
+
     get lineEndingFriendlyName()
     {
         switch(this.lineEnding)
@@ -17,7 +27,7 @@ export default class Project
 
     constructor()
     {
-        this.currentDocument = new TextDocument(this)
+        this.__documents.push(new TextDocument(this))
         this.currentDocument.update('')
     }
 }

@@ -42,35 +42,38 @@ export default class InfoBar
     /** @param {Project} project */
     update(project)
     {
-        // byte count
+        if(project.currentDocument)
         {
-            let unit = 'b'
-            let count = 0
-            const bytes = project.currentDocument.getByteCount()
-            if(bytes < 1024)
+            // byte count
             {
-                unit = 'b'
-                count = Math.floor((bytes) * 100) / 100
-            }
-            else if(bytes < 1024**2)
-            {
-                unit = 'kib'
-                count = Math.floor((bytes / 1024) * 100) / 100
-            }
-            else if(bytes < 1024**3)
-            {
-                unit = 'mib'
-                count = Math.floor((bytes / 1024**2) * 100) / 100
+                let unit = 'b'
+                let count = 0
+                const bytes = project.currentDocument.getByteCount()
+                if(bytes < 1024)
+                {
+                    unit = 'b'
+                    count = Math.floor((bytes) * 100) / 100
+                }
+                else if(bytes < 1024**2)
+                {
+                    unit = 'kib'
+                    count = Math.floor((bytes / 1024) * 100) / 100
+                }
+                else if(bytes < 1024**3)
+                {
+                    unit = 'mib'
+                    count = Math.floor((bytes / 1024**2) * 100) / 100
+                }
+
+                this.byteCountEl.innerText = count.toString() + unit
             }
 
-            this.byteCountEl.innerText = count.toString() + unit
+            this.charCountEl.innerText = project.currentDocument.getCharCount() + 'c'
+            this.wordCountEl.innerText = project.currentDocument.getWordCount() + 'w'
+            this.lineCountEl.innerText = project.currentDocument.getLines().length + 'l'
+
+            this.encodingEl.innerText = project.encoding
         }
-
-        this.charCountEl.innerText = project.currentDocument.getCharCount() + 'c'
-        this.wordCountEl.innerText = project.currentDocument.getWordCount() + 'w'
-        this.lineCountEl.innerText = project.currentDocument.getLines().length + 'l'
-
-        this.encodingEl.innerText = project.encoding
 
         if(project.lineEndingFriendlyName)
         {
