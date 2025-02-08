@@ -117,22 +117,29 @@ export default class Menu
 
         el.innerHTML = label
 
-        el.addEventListener('click', event => {
-            if(option.menu)
+        el.addEventListener('mouseup', event => {
+            if(!option.menu && event.target == el)
             {
+                option.onclick()
+                Array.from(this.activeButtons).forEach(element => {
+                    element.classList.remove('active')
+                })
+            }
+        })
+
+        if(option.menu)
+        {
+            el.addEventListener('mousedown', event => {
+                if(event.target != el)
+                    return;
+
                 el.classList.toggle('active')
                 if(el.classList.contains('active'))
                 {
                     const listEl = Array.from(holderEl.children)[1]
                     recalculateListBounds(listEl)
                 }
-            }
-            else
-                option.onclick()
-        })
-
-        if(option.menu)
-        {
+            })
             document.body.addEventListener('click', event => {
                 if(!holderEl.contains(event.target) && holderEl != event.target)
                     el.classList.remove('active')
@@ -143,7 +150,7 @@ export default class Menu
                         return item.firstElementChild.classList.contains('active')
                     }) != -1
 
-                if(!el.classList.contains('active') && anyActive && depth == 0)
+                if(!el.classList.contains('active') && anyActive)
                 {
                     Array.from(this.activeButtons).forEach(element => {
                         element.classList.remove('active')
