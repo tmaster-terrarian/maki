@@ -28,7 +28,7 @@ export default class Menu
         this.el.appendChild(this.leftEl)
         this.el.appendChild(this.rightEl)
 
-        this.spacerEl.style.width = process.platform === 'darwin' ? '10ch' : '0'
+        this.spacerEl.style.width = process.platform === 'darwin' ? '8ch' : '0'
         this.leftEl.appendChild(this.spacerEl)
     }
 
