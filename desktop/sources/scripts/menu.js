@@ -129,10 +129,7 @@ export default class Menu
 
         if(option.menu)
         {
-            el.addEventListener('mousedown', event => {
-                if(event.target != el)
-                    return;
-
+            el.addEventListener('click', event => {
                 el.classList.toggle('active')
                 if(el.classList.contains('active'))
                 {
