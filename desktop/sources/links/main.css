@@ -195,9 +195,11 @@ body {
 
     overflow: hidden;
 
-    margin: 0.5em 1ch;
+    margin: 0 1ch;
 
     >textarea {
+        padding: 0.5em 0;
+
         border: none;
         resize: none;
         width: 100%;
