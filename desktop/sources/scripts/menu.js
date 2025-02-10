@@ -44,12 +44,30 @@ export default class Menu
 
         if(process.platform !== 'darwin')
         {
+            const minimizeButton = document.createElement('button')
+            minimizeButton.innerText = '_'
+            minimizeButton.onclick = event => {
+                const win = BrowserWindow.getFocusedWindow()
+                if(win && win.minimizable && (process.platform === 'win32' || process.platform === 'darwin'))
+                    BrowserWindow.getFocusedWindow().minimize()
+            }
+
+            const maximizeButton = document.createElement('button')
+            maximizeButton.innerText = 'O'
+            maximizeButton.onclick = event => {
+                const win = BrowserWindow.getFocusedWindow()
+                if(win && win.maximizable && (process.platform === 'win32' || process.platform === 'darwin'))
+                    BrowserWindow.getFocusedWindow().maximize()
+            }
+
             const closeButton = document.createElement('button')
             closeButton.innerText = 'X'
             closeButton.onclick = event => {
                 window.close()
             }
 
+            this.rightEl.appendChild(minimizeButton)
+            this.rightEl.appendChild(maximizeButton)
             this.rightEl.appendChild(closeButton)
         }
 
@@ -112,7 +130,7 @@ export default class Menu
         }
         else if(option.menu && depth != 0)
         {
-            label += `<span class="label">-&gt;</span>`
+            label += `<span class="label">&nbsp;-&gt;</span>`
         }
 
         el.innerHTML = label
