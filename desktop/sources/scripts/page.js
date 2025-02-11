@@ -1,5 +1,3 @@
-import Project from "./lib/Project.js"
-
 export default class Page
 {
     el = document.createElement('div')
@@ -8,6 +6,7 @@ export default class Page
     constructor()
     {
         this.el.classList.add('main')
+        this.textEl.setAttribute('type', 'text')
     }
 
     /** @param {HTMLElement} host */
@@ -17,9 +16,18 @@ export default class Page
         host.appendChild(this.el)
     }
 
-    /** @param {Project} project */
-    update(project)
+    update()
     {
-        this.textEl.innerText = project.currentDocument.text
+        //
+    }
+
+    getPosition()
+    {
+        return this.textEl.selectionEnd
+    }
+
+    load(text)
+    {
+        this.textEl.value = text ?? ''
     }
 }

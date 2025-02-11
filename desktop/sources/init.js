@@ -4,8 +4,7 @@ import menuItems from './scripts/menuItems.js'
 const { shell } = require('electron'), remote = require('@electron/remote')
 const { app, BrowserWindow } = remote
 
-const maki = new Maki()
-
+globalThis.maki = new Maki()
 maki.menu.options = menuItems
 
 if(process.platform === 'win32')

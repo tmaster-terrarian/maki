@@ -9,7 +9,9 @@ const menuItems = [
             new MenuOption({
                 name: 'new',
                 hint: '<c-n>',
-                onclick: () => {},
+                onclick: () => {
+                    maki.project.add()
+                },
                 keyListener: event => process.platform === 'darwin'
                     ? event.key.toLowerCase() === 'n' && event.metaKey && !event.altKey && !event.shiftKey && !event.ctrlKey
                     : event.key.toLowerCase() === 'n' && !event.metaKey && !event.altKey && !event.shiftKey && event.ctrlKey,
@@ -17,7 +19,9 @@ const menuItems = [
             new MenuOption({
                 name: 'open...',
                 hint: '<c-o>',
-                onclick: () => {},
+                onclick: () => {
+                    maki.project.open()
+                },
                 keyListener: event => process.platform === 'darwin'
                     ? event.key.toLowerCase() === 'o' && event.metaKey && !event.altKey && !event.shiftKey && !event.ctrlKey
                     : event.key.toLowerCase() === 'o' && !event.metaKey && !event.altKey && !event.shiftKey && event.ctrlKey,
@@ -27,7 +31,9 @@ const menuItems = [
             new MenuOption({
                 name: 'save',
                 hint: '<c-s>',
-                onclick: () => {},
+                onclick: () => {
+                    maki.project.save()
+                },
                 keyListener: event => process.platform === 'darwin'
                     ? event.key.toLowerCase() === 's' && event.metaKey && !event.altKey && !event.shiftKey && !event.ctrlKey
                     : event.key.toLowerCase() === 's' && !event.metaKey && !event.altKey && !event.shiftKey && event.ctrlKey,
@@ -35,7 +41,9 @@ const menuItems = [
             new MenuOption({
                 name: 'save as...',
                 hint: '<c-S>',
-                onclick: () => {},
+                onclick: () => {
+                    maki.project.saveAs()
+                },
                 keyListener: event => process.platform === 'darwin'
                     ? event.key.toLowerCase() === 's' && event.metaKey && !event.altKey && event.shiftKey && !event.ctrlKey
                     : event.key.toLowerCase() === 's' && !event.metaKey && !event.altKey && event.shiftKey && event.ctrlKey,
@@ -58,41 +66,6 @@ const menuItems = [
         name: 'Edit',
         altKey: 'e',
         menu: new MenuOptionList([
-            new MenuOption({
-                name: 'undo',
-                hint: '<c-z>',
-            }),
-            new MenuOption({
-                name: 'redo',
-                hint: '<c-y>',
-                sectionEnd: true,
-            }),
-
-            new MenuOption({
-                name: 'cut',
-                hint: '<c-x>',
-                onclick: () => {
-                    maki.page.textEl.focus()
-                    const event = new Event('keydown')
-                    event.key = 'v'
-                    event.metaKey = process.platform === 'darwin' ? true : false
-                    event.ctrlKey = process.platform === 'darwin' ? false : true
-                    event.altKey = false
-                    event.shiftKey = false
-                    event.code = 'KeyV'
-                    maki.page.textEl.dispatchEvent(event)
-                },
-            }),
-            new MenuOption({
-                name: 'copy',
-                hint: '<c-c>',
-            }),
-            new MenuOption({
-                name: 'paste',
-                hint: '<c-v>',
-                sectionEnd: true,
-            }),
-
             new MenuOption({
                 name: 'find',
                 hint: '<c-f>',
